@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST
+META.yml
+Makefile.PL
+README
+dist.ini
+lib/MooseX/Has/Options.pm
+t/00-compile.t
+t/01-basic.t
+t/02-meta.t
+t/release-pod-spell.t
+t/release-pod-syntax.t
+weaver.ini

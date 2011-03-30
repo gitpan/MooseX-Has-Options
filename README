@@ -1,0 +1,85 @@
+NAME
+    MooseX::Has::Options - Succinct options for Moose
+
+VERSION
+    version 0.001
+
+SYNOPSIS
+        use Moose;
+        use MooseX::Has::Options;
+
+        has 'some_attribute' => (
+            qw(:ro :required),
+            isa => 'Str',
+            ...
+        );
+
+        has 'another_attribute' => (
+            qw(:ro :lazy_build),
+            isa => 'Str',
+            ...
+        );
+
+DESCRIPTION
+    This module provides a succinct syntax for declaring options for Moose
+    attributes. It hijacks the "has" function imported by Moose and replaces
+    it with one that understands the options syntax described above.
+
+USAGE
+  Declaring options
+    MooseX::Has::Params works by checking the arguments to "has" for strings
+    that look like options, i.e. alphanumeric strings preceded by a colon,
+    and replaces them with a hash whose keys are the names of the options
+    (sans the colon) and the values are 1's. Thus,
+
+        has 'some_attribute', ':required';
+
+    becomes:
+
+        has 'some_attribute', required => 1;
+
+    The options "ro", "rw" and "bare" are treated differently:
+
+        has 'some_attribute', ':ro';
+
+    becomes:
+
+        has 'some_attribute', is => 'ro';
+
+    Options must come in the beginning of the argument list.
+    MooseX::Has::Options will stop searching for options after the first
+    alphanumeric string that does not start with a colon.
+
+  Importing
+    MooseX::Has::Params hooks into a "has" function that already exists in
+    your module's namespace. Therefore it must be imported after Moose. A
+    side effect of this is that it will work with any module that provides a
+    "has" function, e.g. Mouse.
+
+    If you specify arguments when importing MooseX::Has::Params, it will
+    hook to these functions instead. Use this to change the behavior of
+    functions that provide a syntax similar to Moose attributes:
+
+        use HTML::FormHandler::Moose;
+        use MooseX::Has::Options qw(has_field);
+
+        has_field 'name' => (
+            qw(:required),
+            type => 'Text',
+        );
+
+    The special treatment of "ro", "rw" and "bare" will be disabled for such
+    functions.
+
+SEE ALSO
+    *   MooseX::Has::Sugar
+
+AUTHOR
+    Peter Shangov <pshangov@yahoo.com>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2011 by Peter Shangov.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
