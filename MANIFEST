@@ -1,3 +1,4 @@
+Changes
 LICENSE
 MANIFEST
 META.yml
@@ -8,6 +9,8 @@ lib/MooseX/Has/Options.pm
 t/00-compile.t
 t/01-basic.t
 t/02-meta.t
+t/release-eol.t
+t/release-no-tabs.t
 t/release-pod-spell.t
 t/release-pod-syntax.t
 weaver.ini

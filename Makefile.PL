@@ -28,9 +28,9 @@ my %WriteMakefileArgs = (
   'NAME' => 'MooseX::Has::Options',
   'PREREQ_PM' => {
     'Carp' => '0',
-    'Package::Stash' => '0'
+    'Package::Stash' => '0.18'
   },
-  'VERSION' => '0.001',
+  'VERSION' => '0.002',
   'test' => {
     'TESTS' => 't/*.t'
   }

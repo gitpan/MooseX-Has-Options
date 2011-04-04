@@ -2,7 +2,7 @@ NAME
     MooseX::Has::Options - Succinct options for Moose
 
 VERSION
-    version 0.001
+    version 0.002
 
 SYNOPSIS
         use Moose;

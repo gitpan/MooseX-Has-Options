@@ -1,6 +1,6 @@
 package MooseX::Has::Options;
 BEGIN {
-  $MooseX::Has::Options::VERSION = '0.001';
+  $MooseX::Has::Options::VERSION = '0.002';
 }
 
 # ABSTRACT: Succinct options for Moose
@@ -13,50 +13,50 @@ use Carp           ();
 
 sub import
 {
-	my ($class, @keywords) = @_;
-	@keywords = 'has' unless @keywords;
-	my $stash = Package::Stash->new(scalar caller());
+    my ($class, @keywords) = @_;
+    @keywords = 'has' unless @keywords;
+    my $stash = Package::Stash->new(scalar caller());
 
-	foreach my $keyword (@keywords)
-	{
-		if ($stash->has_symbol("&$keyword"))
-		{
-			my $orig = $stash->get_symbol("&$keyword");
-			$stash->add_symbol("&$keyword", sub { $orig->(_expand_options($keyword, @_)) });
-		}
-		else
-		{
+    foreach my $keyword (@keywords)
+    {
+        if ($stash->has_symbol("&$keyword"))
+        {
+            my $orig = $stash->get_symbol("&$keyword");
+            $stash->add_symbol("&$keyword", sub { $orig->(_expand_options($keyword, @_)) });
+        }
+        else
+        {
             Carp::carp "Cannot add options for $keyword, no subroutine found in caller package";
-		}
-	}
+        }
+    }
 }
 
 sub _expand_options
 {
-	my $keyword = shift;
+    my $keyword = shift;
     my $name = shift;
 
-	my %expanded;
+    my %expanded;
 
-	foreach my $option (@_)
-	{
-		if ( $keyword eq 'has' and $option =~ /^:(ro|rw|bare)$/ )
-		{
-			$expanded{is} = $1;
-		}
-		elsif ( $option =~ /^:(\w+)$/ )
-		{
-			$expanded{$1} = 1;
-		}
-		else
-		{
-			last;
-		}
-	}
-	
-	splice @_, 0, scalar keys %expanded;
+    foreach my $option (@_)
+    {
+        if ( $keyword eq 'has' and $option =~ /^:(ro|rw|bare)$/ )
+        {
+            $expanded{is} = $1;
+        }
+        elsif ( $option =~ /^:(\w+)$/ )
+        {
+            $expanded{$1} = 1;
+        }
+        else
+        {
+            last;
+        }
+    }
 
-	return $name, @_, %expanded;
+    splice @_, 0, scalar keys %expanded;
+
+    return $name, @_, %expanded;
 }
 
 1;
@@ -73,7 +73,7 @@ MooseX::Has::Options - Succinct options for Moose
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
@@ -100,7 +100,7 @@ This module provides a succinct syntax for declaring options for L<Moose> attrib
 
 =head2 Declaring options
 
-MooseX::Has::Params works by checking the arguments to C<has> for strings that look like options, i.e. alphanumeric strings preceded by a colon, and replaces them with a hash whose keys are the names of the options (sans the colon) and the values are C<1>'s. Thus, 
+MooseX::Has::Params works by checking the arguments to C<has> for strings that look like options, i.e. alphanumeric strings preceded by a colon, and replaces them with a hash whose keys are the names of the options (sans the colon) and the values are C<1>'s. Thus,
 
     has 'some_attribute', ':required';
 
