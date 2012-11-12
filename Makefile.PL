@@ -4,35 +4,39 @@ use warnings;
 
 
 
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.30;
 
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'Succinct options for Moose',
-  'AUTHOR' => 'Peter Shangov <pshangov@yahoo.com>',
-  'BUILD_REQUIRES' => {
-    'File::Find' => '0',
-    'File::Temp' => '0',
-    'Moose' => '0',
-    'Test::More' => '0',
-    'Test::Most' => '0',
-    'namespace::autoclean' => '0'
+  "ABSTRACT" => "Succinct options for Moose",
+  "AUTHOR" => "Peter Shangov <pshangov\@yahoo.com>",
+  "BUILD_REQUIRES" => {
+    "File::Find" => 0,
+    "File::Temp" => 0,
+    "Moose" => 0,
+    "Test::More" => 0,
+    "Test::Most" => 0,
+    "namespace::autoclean" => 0
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.31'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'DISTNAME' => 'MooseX-Has-Options',
-  'EXE_FILES' => [],
-  'LICENSE' => 'perl',
-  'NAME' => 'MooseX::Has::Options',
-  'PREREQ_PM' => {
-    'Carp' => '0',
-    'Package::Stash' => '0.18'
+  "DISTNAME" => "MooseX-Has-Options",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "MooseX::Has::Options",
+  "PREREQ_PM" => {
+    "Class::Load" => 0,
+    "List::MoreUtils" => 0,
+    "Package::Stash" => "0.18",
+    "String::RewritePrefix" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
-  'VERSION' => '0.002',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "0.003",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 
